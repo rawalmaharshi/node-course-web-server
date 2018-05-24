@@ -2,16 +2,17 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 
 //Middleware  bypasses all other handler methods, can be used when updating website.
-app.use((req, res, next) => {
-    res.render('maintenance.hbs');
-    // next();no need to use next
-});
+// app.use((req, res, next) => {
+//     res.render('maintenance.hbs');
+//     // next();no need to use next
+// });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -56,6 +57,6 @@ app.get('/bad', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server is up and running.');
+app.listen(port, () => {
+    console.log(`Server is up and running on port ${port}`);
 });
